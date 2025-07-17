@@ -2,10 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        String[] names = new String[3];
-        int[][] grade = new int[3][3];
-
+        student[] Students = new student[3];
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -15,18 +12,21 @@ public class Main {
             System.out.println("2. visualize students grade?");
             System.out.println("3. visualize students average grade?");
             System.out.println("4. close");
+
             int choice = scanner.nextInt();
+
             switch (choice) {
 
                 case 1:
-                    scanner.nextLine();
-                    for (int i = 0; i < names.length; i++) {
-                        if (names[i] == null) {
-                            System.out.println("what's the student name?");
-                            names[i] = scanner.nextLine();
+                    for (int i = 0; i < 3; i++) {
+                        if (Students[i] == null) {
+                            Students[i] = new student();
+                            scanner.nextLine(); // Limpa o ENTER do nextInt()
+                            System.out.println("What's the student name?");
+                            Students[i].name = scanner.nextLine();
                             for (int x = 0; x < 3; x++) {
                                 System.out.println("register the student grade");
-                                grade[i][x] = scanner.nextInt();
+                                Students[i].grade[x] = scanner.nextInt();
                             }
                             break;
                         }
@@ -34,11 +34,11 @@ public class Main {
                     break;
 
                 case 2:
-                    for (int i = 0; i < names.length; i++) {
-                        if(names[i] != null) {
-                        System.out.print(names[i]+ " ");
-                        for (int j = 0; j < 3; j++) {
-                                System.out.print(grade[i][j]+ " ");
+                    for (int i = 0; i < 3; i++) {
+                        if (Students[i] != null && Students[i].name != null){
+                            System.out.print(Students[i].name + " ");
+                            for (int j = 0; j < 3; j++) {
+                                System.out.print(Students[i].grade[j]+ " ");
                             }
                             System.out.println("\n");
                         }
@@ -46,11 +46,11 @@ public class Main {
                     break;
 
                 case 3:
-                    for (int i = 0; i < names.length; i++) {
-                        if (names[i] != null) {
-                            System.out.println(names[i] + " average grade: ");
-                            double average = (grade[i][0] + grade[i][1] + grade[i][2])/3.0;
-                            System.out.print(average);
+                    for (int i = 0; i < 3; i++) {
+                        if (Students[i] != null) {
+                            System.out.print(Students[i].name + " average grade: ");
+                            double average = (Students[i].grade[0] + Students[i].grade[1] + Students[i].grade[2])/3.0;
+                            System.out.print(average + "\n");
                         }
                     }
                     break;
@@ -60,5 +60,6 @@ public class Main {
                     return;
             }
         }
+
     }
 }
